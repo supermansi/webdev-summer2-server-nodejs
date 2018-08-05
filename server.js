@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({encoded: true}));
 app.use(session({
     resave: false,
     saveUninitialized: true,
-    secret: 'any string loloolol'
+    secret: 'any string lololol'
 }));
 
 app.get('/', function (req, res) {
@@ -29,6 +29,9 @@ app.use('/', function(req, res, next){
 
 var userService = require('./services/user.service.server');
 userService(app);
+
+var sectionService = require('./services/section.service.server')
+sectionService(app);
 
 
 app.listen(3000)

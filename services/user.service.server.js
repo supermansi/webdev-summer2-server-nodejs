@@ -1,13 +1,13 @@
 module.exports = function(app) {
 
-    var userModel = require('../models/user.model.server')
+    var userModel = require('../models/user/user.model.server')
 
     function login(req, res) {
         var user = req.body;
         userModel.findUserByCredentials(user.username, user.password)
             .then(user => {
-                req.session[currentUser] = user;
-                res.send(user)
+                req.session['currentUser'] = user;
+                res.send(req.session['currentUser'])
             })
     }
 
@@ -34,7 +34,12 @@ module.exports = function(app) {
     }
 
     function currentUser(req, res) {
-        res.send(req.session);
+        res.send(req.session['currentUser']);
+    }
+
+    function findAllUsers(req, res) {
+        userModel.findAllUsers()
+            .then(users => res.send(users));
     }
 
 /*    userModel.findAllUsers()
@@ -55,7 +60,13 @@ module.exports = function(app) {
     app.post('/api/login',
         login)
 
-    app.post('/api/login', login);
+    app.post('/api/login',
+        login);
 
-    app.get('/currentUser', currentUser);
+    app.get('/api/currentUser',
+        currentUser);
+
+    app.get('/api/user',
+        findAllUsers);
+
 }
