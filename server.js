@@ -1,6 +1,13 @@
 var express = require('express')
-var session = require('express-session')
 var app = express()
+var session = require('express-session')
+var bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost/whiteboard')
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({encoded: true}));
 
 app.use(session({
     resave: false,
@@ -8,48 +15,26 @@ app.use(session({
     secret: 'any string loloolol'
 }));
 
-app.get('/message/:message',
-    (req, res) => {
-        var msg = req.params['message'];
-        res.send("Your message is " + msg);
-    })
-
-app.get('/', function(req, res){
-    res.send('Hello World!')
+app.get('/', function (req, res) {
+    res.send('Hello World')
 })
 
-app.get('/api/session/set/:name/:value',
-    setSession);
+app.use('/', function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+    res.header("Access-Control-Allow-Methods", "GET, POST","PUT", "DELETE");
+    res.header("Access-Control-Allow-Credentials", true);
+    next();
+})
 
-app.get('/api/session/get/:name',
-    getSession);
+var userService = require('./services/user.service.server');
+userService(app);
 
-app.get('/api/session/get',
-    getSessionAll);
-
-app.get('/api/session/reset',
-    resetSession)
-
-function setSession(req, res) {
-    var name = req.params['name'];
-    var value = req.params['value'];
-    req.session[name] = value;
-    res.send(req.session);
-}
-
-function getSession(req, res) {
-    var name = req.params['name'];
-    var value = req.session[name];
-    res.send(value);
-}
-
-function getSessionAll(req, res) {
-    res.send(req.session);
-}
-
-function resetSession(req, res) {
-    req.session.destroy();
-    res.send(200);
-}
 
 app.listen(3000)
+
+/*
+userModel.createUser({
+    username: 'test',
+    password: 'test'
+})*/
