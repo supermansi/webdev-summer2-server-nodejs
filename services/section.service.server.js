@@ -11,6 +11,9 @@ module.exports = function (app) {
     app.get('/api/course/:courseId/section',
         findSectionsForCourse);
 
+    app.put('/api/section/:sectionId/enroll',
+        enroll);
+
     function addSection(req, res) {
         sectionModel
             .createSection(req.body)
@@ -29,5 +32,12 @@ module.exports = function (app) {
         sectionModel
             .findSectionsForCourse(courseId)
             .then(sections => res.send(sections));
+    }
+
+    function enroll(req, res) {
+        var sectionId = req.params['sectionId'];
+        sectionModel
+            .enroll(req.session['currentUser']._id, sectionId)
+            .then(status => res.sendStatus(200));
     }
 }
