@@ -6,6 +6,21 @@ module.exports = function(app) {
         var user = req.body;
         userModel.findUserByCredentials(user.username, user.password)
             .then(user => {
+                if(user !== null) {
+                    console.log(user);
+                    req.session['currentUser'] = user;
+                    res.send(req.session['currentUser']);
+                }
+                else {
+                    res.send(null);
+                }
+            })
+    }
+
+    function register(req, res) {
+        var user = req.body;
+        userModel.createUser(user)
+            .then(user => {
                 req.session['currentUser'] = user;
                 res.send(req.session['currentUser'])
             })
@@ -42,6 +57,19 @@ module.exports = function(app) {
             .then(users => res.send(users));
     }
 
+    function updateUser(req, res) {
+        var user = req.body;
+        console.log(user);
+        userModel.updateUser(user._id, user);
+        req.session['currentUser'] = user;
+        res.send(req.session['currentUser']);
+    }
+
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
+    }
+
 /*    userModel.findAllUsers()
         .then(users => console.log(users));*/
 
@@ -55,18 +83,24 @@ module.exports = function(app) {
         getSessionAll);
 
     app.get('/api/session/reset',
-        resetSession)
-
-    app.post('/api/login',
-        login)
+        resetSession);
 
     app.post('/api/login',
         login);
 
-    app.get('/api/currentUser',
+    app.post('/api/register',
+        register);
+
+    app.get('/api/profile',
         currentUser);
 
     app.get('/api/user',
         findAllUsers);
+
+    app.put('/api/profile',
+        updateUser);
+
+    app.post('/api/logout',
+        logout);
 
 }

@@ -1,10 +1,10 @@
-var express = require('express')
-var app = express()
-var session = require('express-session')
-var bodyParser = require('body-parser')
-const mongoose = require('mongoose')
+var express = require('express');
+var app = express();
+var session = require('express-session');
+var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/whiteboard')
+mongoose.connect('mongodb://localhost/whiteboard');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({encoded: true}));
@@ -22,19 +22,19 @@ app.get('/', function (req, res) {
 app.use('/', function(req, res, next){
     res.header("Access-Control-Allow-Origin", "http://localhost:4200");
     res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-    res.header("Access-Control-Allow-Methods", "GET, POST","PUT", "DELETE");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Credentials", true);
     next();
-})
+});
 
 var userService = require('./services/user.service.server');
 userService(app);
 
-var sectionService = require('./services/section.service.server')
+var sectionService = require('./services/section.service.server');
 sectionService(app);
 
 
-app.listen(3000)
+app.listen(3000);
 
 /*
 userModel.createUser({

@@ -33,7 +33,7 @@ function deleteUser(userId) {
 }
 
 function updateUser(userId, newUser) {
-    return userModel.update({_id: userId},
+    userModel.update({_id: userId},
         {$set: newUser});
 }
 
