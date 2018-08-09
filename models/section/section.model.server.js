@@ -24,8 +24,36 @@ enroll = (userId, sectionId) => {
 
 }
 
+findAllSectionsForStudent = (studentId) =>
+    userModel.findUserById(studentId)
+        .then(user => {
+            return user.sections;
+        })
+
+decrementSeats = (sectionId) => {
+    return sectionModel
+        .update({
+            _id: sectionId
+        }, {
+            $inc: {seats: -1}
+        });
+}
+
+incrementSeats = (sectionId) => {
+    return sectionModel
+        .update({
+            _id: sectionId
+        }, {
+            $inc: {seats: +1}
+        });
+}
+
 module.exports = {
     createSection,
+    enroll,
     findAllSections,
-    findSectionsForCourse
+    findSectionsForCourse,
+    findAllSectionsForStudent,
+    decrementSeats,
+    incrementSeats
 }

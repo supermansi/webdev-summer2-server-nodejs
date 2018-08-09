@@ -58,11 +58,13 @@ module.exports = function(app) {
     }
 
     function updateUser(req, res) {
-        var user = req.body;
-        console.log(user);
-        userModel.updateUser(user._id, user);
-        req.session['currentUser'] = user;
-        res.send(req.session['currentUser']);
+        let user = req.body;
+        return userModel.updateUser(user._id, user)
+            .then(user =>{
+                console.log(user);
+                req.session['currentUser'] = user;
+                res.send(req.session['currentUser']);
+            });
     }
 
     function logout(req, res) {

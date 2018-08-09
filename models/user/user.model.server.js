@@ -33,8 +33,9 @@ function deleteUser(userId) {
 }
 
 function updateUser(userId, newUser) {
-    userModel.update({_id: userId},
-        {$set: newUser});
+    return userModel.update({_id: userId},
+        {$set: newUser})
+        .then(findUserById(userId));
 }
 
 module.exports = {

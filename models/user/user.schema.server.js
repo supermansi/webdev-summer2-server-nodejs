@@ -5,7 +5,7 @@ var userSchema = mongoose.Schema({
     password: String,
     firstName: String,
     lastName: String,
-    //phone: Integer,
+    phone: Number,
     email: String,
     address: String,
     sections: [{type: mongoose.Schema.Types.ObjectId, ref: 'SectionModel'}]
