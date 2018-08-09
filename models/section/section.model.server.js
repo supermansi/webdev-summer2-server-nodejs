@@ -18,7 +18,7 @@ findSectionsForCourse = (courseId) =>
 enroll = (userId, sectionId) => {
     userModel.findUserById(userId)
         .then(user => {
-            user.sections.push(sectionId)
+            user.sections.push(sectionId);
             return user.save();
         });
 
