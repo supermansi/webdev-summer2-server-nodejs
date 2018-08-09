@@ -47,6 +47,16 @@ module.exports = function (app) {
             .findAllSectionsForStudent(studentId)
     }
 
+    function deleteSection(req, res) {
+        var sectionId = req.params['sectionId'];
+        sectionModel
+            .deleteSection(sectionId)
+            .then(status => {
+                console.log(status);
+                res.sendStatus(200)
+            });
+    }
+
     app.post('/api/section',
         addSection);
 
@@ -64,6 +74,9 @@ module.exports = function (app) {
 
     app.get('/api/student/:sid/section',
         findAllSectionsForStudent);
+
+    app.delete('/api/section/:sectionId',
+        deleteSection);
 
     // app.post('/api/course/:courseId/section',
     //     addSectionForCourse);

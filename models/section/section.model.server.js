@@ -24,6 +24,13 @@ enroll = (userId, sectionId) => {
 
 }
 
+deleteSection = (sectionId) => {
+    console.log(sectionId);
+    return sectionModel.remove({
+        _id: sectionId
+    });
+}
+
 findAllSectionsForStudent = (studentId) =>
     userModel.findUserById(studentId)
         .then(user => {
@@ -54,6 +61,7 @@ module.exports = {
     findAllSections,
     findSectionsForCourse,
     findAllSectionsForStudent,
+    deleteSection,
     decrementSeats,
     incrementSeats
 }
