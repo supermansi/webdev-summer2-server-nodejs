@@ -17,8 +17,27 @@ module.exports = function(app) {
             })
     }
 
+    /*function register(req, res) {
+        var user = req.body;
+        userModel.findUserByUsername(user.username)
+            .then(user => {
+                console.log(user);
+                if(!user){
+                    return userModel.createUser(user)
+                }
+                else{
+                    res.sendStatus(406);
+                }
+            })
+            .then(user => {
+            req.session['currentUser'] = user;
+            res.send(req.session['currentUser']);
+        });
+    }*/
+
     function register(req, res) {
         var user = req.body;
+        console.log(userModel.findUserByUsername(user.username));
         userModel.createUser(user)
             .then(user => {
                 req.session['currentUser'] = user;
@@ -49,7 +68,14 @@ module.exports = function(app) {
     }
 
     function currentUser(req, res) {
-        res.send(req.session['currentUser']);
+        // console.log(req.session['currentUser']);
+        const currentUser = req.session['currentUser'];
+        if(currentUser) {
+            res.send(req.session['currentUser']);
+        }
+        else{
+            res.send(req.session['currentUser']);
+        }
     }
 
     function findAllUsers(req, res) {

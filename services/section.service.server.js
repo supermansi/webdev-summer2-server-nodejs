@@ -69,8 +69,8 @@ module.exports = function (app) {
      app.put('/api/section/:sectionId/enroll',
         enroll);
 
-    app.post('/api/student/:sid/section/:kid',
-        enroll);
+/*    app.post('/api/student/:sid/section/:kid',
+        enroll);*/
 
     app.get('/api/student/:sid/section',
         findAllSectionsForStudent);

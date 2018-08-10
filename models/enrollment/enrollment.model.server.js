@@ -4,10 +4,10 @@ var enrollmentModel = mongoose.model('EnrollmentModel', enrollmentSchema);
 
 function enrollStudentInSection(studentId, sectionId) {
     var enrollment = {
-        student: studentId,
-        section: sectionId
+        studentId: studentId,
+        sectionId: sectionId
     };
-    console.log(enrollment);
+    //console.log(enrollment);
     return enrollmentModel.create(enrollment);
 }
 

@@ -12,7 +12,7 @@ function findUserById(userId) {
 }
 
 function findUserByUsername(username) {
-    return userModel.findOne({username: username});
+    return userModel.findOne({'username': username});
 }
 
 function findUserByCredentials(username, password) {

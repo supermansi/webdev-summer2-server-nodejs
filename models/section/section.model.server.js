@@ -21,7 +21,6 @@ enroll = (userId, sectionId) => {
             user.sections.push(sectionId);
             return user.save();
         });
-
 }
 
 deleteSection = (sectionId) => {
@@ -35,7 +34,7 @@ findAllSectionsForStudent = (studentId) =>
     userModel.findUserById(studentId)
         .then(user => {
             return user.sections;
-        })
+        });
 
 decrementSeats = (sectionId) => {
     return sectionModel
