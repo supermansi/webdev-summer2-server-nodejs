@@ -4,8 +4,8 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mansijain:webdev123@ds215822.mlab.com:15822/webdev-summer2-mansijain');
-// mongoose.connect('mongodb://localhost/whiteboard');
+//mongoose.connect('mongodb://mansijain:webdev123@ds215822.mlab.com:15822/webdev-summer2-mansijain');
+ mongoose.connect('mongodb://localhost/whiteboard');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({encoded: true}));
@@ -36,6 +36,8 @@ sectionService(app);
 
 var enrollmentService = require('./services/enrollment.service.server');
 enrollmentService(app);
+
+require('./services/quiz.service.server')(app);
 
 app.listen(3000);
 
