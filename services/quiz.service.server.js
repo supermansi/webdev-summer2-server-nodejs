@@ -9,9 +9,8 @@ module.exports = app => {
     }
 
     findAllQuizzes = (req, res) => {
-/*        quizModel.findAllQuizzes()
-            .then(quizzes => res.send(quizzes));*/
-            res.send('Hello world!');
+        quizModel.findAllQuizzes()
+            .then(quizzes => res.send(quizzes));
     }
 
     findQuizById =(req, res) => {

@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const quizSchema = require('./quiz.schema.server');
 const quizModel = mongoose.model('QuizModel', quizSchema);
 
-createQuiz = () =>
-    quizModel.create({title: 'test'});
+createQuiz = (quiz) => {
+    console.log(quiz);
+    return quizModel.create(quiz);
+}
 
 findAllQuizzes = () =>
     quizModel.find();

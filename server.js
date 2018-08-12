@@ -4,8 +4,14 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const option = {
+    socketTimeoutMS: 30000,
+    keepAlive: true,
+    reconnectTries: 30000
+};
+
 //mongoose.connect('mongodb://mansijain:webdev123@ds215822.mlab.com:15822/webdev-summer2-mansijain');
- mongoose.connect('mongodb://localhost/whiteboard');
+ mongoose.connect('mongodb://localhost/whiteboard', option);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({encoded: true}));
