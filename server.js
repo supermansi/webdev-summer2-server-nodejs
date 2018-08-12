@@ -45,6 +45,8 @@ enrollmentService(app);
 
 require('./services/quiz.service.server')(app);
 
+require('./services/questions.service.server')(app);
+
 app.listen(3000);
 
 /*

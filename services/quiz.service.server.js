@@ -28,6 +28,15 @@ module.exports = app => {
             .then(status => res.send(status));
     }
 
+    addQuestionToQuiz = (req, res) => {
+        quizModel.addQuestion(req.params['quizId'], req.params['questionId'])
+            .then(
+                status => res.send(status),
+                error => res.send(error)
+            );
+    }
+
+
     app.post('/api/quiz',
         createQuiz);
 
@@ -42,5 +51,8 @@ module.exports = app => {
 
     app.delete('/api/quiz/:quizId',
         deleteQuiz);
+
+    app.put('/api/quiz/:quizId/question/:questionId',
+        addQuestionToQuiz);
 
 }
