@@ -8,6 +8,8 @@ module.exports = mongoose.Schema({
         value: String,
         correct: Boolean
     }],
+    isTrue: Boolean,
+    blanks: [],
     questionType: {
         type: String,
         enum: [ 'ESSAY',
@@ -15,4 +17,5 @@ module.exports = mongoose.Schema({
                 'TRUE_FALSE',
                 'CHOICE']
     }
+
 }, {collection: 'question'});

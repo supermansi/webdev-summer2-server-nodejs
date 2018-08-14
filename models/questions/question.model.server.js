@@ -12,7 +12,7 @@ findQuestionById = questionId =>
     questionModel.findById(questionId);
 
 updateQuestion = (questionId, question) =>
-    questionMode.update({_id: questionId},
+    questionModel.update({_id: questionId},
         {$set: question});
 
 deleteQuestion = questionId =>

@@ -14,6 +14,10 @@ module.exports = app => {
         questionModel.deleteQuestion(req.params['questionId'])
             .then(status => res.send(status));
 
+    updateQuestion = (req, res) =>
+        questionModel.updateQuestion(req.params['questionId'], req.body)
+            .then(status => res.send(status));
+
     app.post('/api/question',
         createQuestion);
 
@@ -22,4 +26,7 @@ module.exports = app => {
 
     app.delete('/api/question/:questionId',
         deleteQuestion);
+
+    app.put('/api/question/:questionId',
+        updateQuestion);
 }
