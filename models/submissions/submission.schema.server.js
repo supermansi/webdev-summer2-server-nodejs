@@ -4,12 +4,8 @@ module.exports = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserModel'
     },
-    question: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserModel'
-    },
     answers: [{
-        fillBlanksAsnwers: {
+        fillBlanksAnswers: {
             variable: String,
             value: String
         },
@@ -17,8 +13,12 @@ module.exports = mongoose.Schema({
         trueFalseAnswer: Boolean,
         essayAnswer: String
     }],
-    question: {
+    questions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'QuestionModel'
+    }],
+    quiz: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'QuizModel'
     }
-})
+}, {collection: 'submission'})
