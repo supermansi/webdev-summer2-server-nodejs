@@ -24,4 +24,4 @@ module.exports = {
     findQuestionById,
     updateQuestion,
     deleteQuestion
-}
+};

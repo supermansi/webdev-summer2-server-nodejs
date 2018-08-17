@@ -98,6 +98,10 @@ module.exports = function(app) {
         res.send(200);
     }
 
+    findUserById = (req, res) =>
+        userModel.findUserById(req.params['userId'])
+            .then(user => res.send(user));
+
 /*    userModel.findAllUsers()
         .then(users => console.log(users));*/
 
@@ -130,5 +134,8 @@ module.exports = function(app) {
 
     app.post('/api/logout',
         logout);
+
+    app.get('/api/user/:userId',
+        findUserById);
 
 }

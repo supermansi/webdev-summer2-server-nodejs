@@ -12,6 +12,11 @@ findById = (quizId, submissionId) =>
         quiz: quizId
     })
 
+findSubById = subId =>
+    submissionModel.findById({
+        _id: subId
+    })
+
 findAllSubmissions =() =>
     submissionModel.find()
 
@@ -30,5 +35,6 @@ module.exports = {
     findById,
     findAllSubmissions,
     findAllSubmissionsForStudent,
-    findAllSubmissionsForQuiz
+    findAllSubmissionsForQuiz,
+    findSubById
 }

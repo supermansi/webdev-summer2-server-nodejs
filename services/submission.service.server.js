@@ -4,7 +4,10 @@ module.exports = app => {
 
     findAllSubmissions = (req, res) => {
         submissionModel.findAllSubmissionsForQuiz(req.params['quizId'])
-            .then(submissions => res.send(submissions))
+            .then(submissions => {
+                console.log(submissions);
+                res.json(submissions);
+            })
     }
 
     findSubmissionById = (req, res) => {
@@ -17,13 +20,25 @@ module.exports = app => {
             .then(submission => res.send(submission))
     }
 
+    findSubById = (req, res) => {
+        submissionModel.findSubById(req.params['subId'])
+            .then(submission => res.send(submission))
+    }
+
     app.get('/api/quiz/:quizId/submission',
         findAllSubmissions);
 
     app.get('/api/quiz/:quizId/submission/:submissionId',
         findSubmissionById);
 
+    app.get('/api')
+
     app.post('/api/quiz/:quizId/submission',
         createSubmission);
+
+    app.get('/api/sub/:subId',
+        findSubById);
+
+
 
 }
